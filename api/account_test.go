@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	mockdb "github.com/lzhp1988/simplebank/db/mock"
-	db "github.com/lzhp1988/simplebank/db/sqlc"
-	"github.com/lzhp1988/simplebank/util"
+	mockdb "github.com/liumc/simplebank/db/mock"
+	db "github.com/liumc/simplebank/db/sqlc"
+	"github.com/liumc/simplebank/util"
 	"github.com/stretchr/testify/require"
 )
 
