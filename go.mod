@@ -1,4 +1,4 @@
-module github.com/liumc/simplebank
+module github.com/qbitty/simplebank
 
 go 1.16
 

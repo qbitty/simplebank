@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/liumc/simplebank/util"
+	"github.com/qbitty/simplebank/util"
 	"github.com/stretchr/testify/require"
 )
 

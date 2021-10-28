@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
-	db "github.com/liumc/simplebank/db/sqlc"
-	"github.com/liumc/simplebank/util"
+	db "github.com/qbitty/simplebank/db/sqlc"
+	"github.com/qbitty/simplebank/util"
 )
 
 type createUserRequest struct {
