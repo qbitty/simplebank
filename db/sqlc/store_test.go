@@ -9,7 +9,7 @@ import (
 )
 
 func TestTransferTx(t *testing.T) {
-	store := NetStore(testDB)
+	store := NewStore(testDB)
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
 
@@ -110,7 +110,7 @@ func TestTransferTx(t *testing.T) {
 }
 
 func TestTransferTxDeadLock(t *testing.T) {
-	store := NetStore(testDB)
+	store := NewStore(testDB)
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
 
