@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"pro.qbitty/simplebank/db/util"
+	"pro.qbitty/simplebank/util"
 )
 
 func TestCreateAccount(t *testing.T) {

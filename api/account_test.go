@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/require"
 	mockdb "pro.qbitty/simplebank/db/mock"
 	db "pro.qbitty/simplebank/db/sqlc"
-	"pro.qbitty/simplebank/db/util"
+	"pro.qbitty/simplebank/util"
 )
 
 func TestGetAccount(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	_ "github.com/lib/pq"
 	"pro.qbitty/simplebank/api"
 	db "pro.qbitty/simplebank/db/sqlc"
-	"pro.qbitty/simplebank/db/util"
+	"pro.qbitty/simplebank/util"
 )
 
 func main() {

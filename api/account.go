@@ -10,10 +10,10 @@ import (
 
 type CreateAccountParams struct {
 	Owner    string `json:"owner" binding:"required"`
-	Currency string `json:"currency" binding:"required,oneof=EUR USD"`
+	Currency string `json:"currency" binding:"required,currency"`
 }
 
-func (server *Server) CreateAccount(ctx *gin.Context) {
+func (server *Server) createAccount(ctx *gin.Context) {
 	var req CreateAccountParams
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
@@ -40,7 +40,7 @@ type GetAccountParams struct {
 	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
-func (server *Server) GetAccount(ctx *gin.Context) {
+func (server *Server) getAccount(ctx *gin.Context) {
 	var req GetAccountParams
 	err := ctx.ShouldBindUri(&req)
 	if err != nil {
@@ -66,7 +66,7 @@ type ListAccountsParams struct {
 	PageSize int32 `form:"page_size" binding:"required,oneof=5 10 20"`
 }
 
-func (server *Server) ListAccount(ctx *gin.Context) {
+func (server *Server) listAccount(ctx *gin.Context) {
 	var req ListAccountsParams
 	err := ctx.ShouldBindQuery(&req)
 	if err != nil {

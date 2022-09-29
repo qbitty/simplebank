@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"pro.qbitty/simplebank/db/util"
+	"pro.qbitty/simplebank/util"
 )
 
 func createRandomTransfer(t *testing.T, account1, account2 Account) Transfer {

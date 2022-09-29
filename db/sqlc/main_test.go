@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	_ "github.com/lib/pq"
-	"pro.qbitty/simplebank/db/util"
+	"pro.qbitty/simplebank/util"
 )
 
 var testQueries *Queries
