@@ -96,7 +96,7 @@ func TestTransferTx(t *testing.T) {
 		require.NotContains(t, existed, k)
 		existed[k] = true
 	}
-	// TODO: check accounts' balance
+	// check accounts' balance
 	updatedAccount1, err := testQueries.GetAccount(context.Background(), account1.ID)
 	require.NoError(t, err)
 

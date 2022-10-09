@@ -36,23 +36,32 @@ func NewStore(db *sql.DB) Store {
 	}
 }
 
-func (store *SqlStore) execTx(ctx context.Context, fn func(q *Queries) error) error {
+func (store *SqlStore) withTransaction(ctx context.Context, fn func(q *Queries) error) (err error) {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
-		return err
+		return
 	}
+
+	defer func() {
+		if p := recover(); p != nil {
+			// a panic occurred, rollback and repanic
+			if rbErr := tx.Rollback(); rbErr != nil {
+				err = rbErr
+			}
+			panic(p)
+		} else if err != nil {
+			// something went wrong, rollback
+			if rbErr := tx.Rollback(); rbErr != nil {
+				err = fmt.Errorf("tx err: %v,rb err: %v", err, rbErr)
+			}
+		} else {
+			// all good, commit
+			err = tx.Commit()
+		}
+	}()
 
 	q := New(tx)
-	err = fn(q)
-	if err != nil {
-		if rbErr := tx.Rollback(); rbErr != nil {
-			return fmt.Errorf("tx err: %v,rb err: %v", err, rbErr)
-		}
-
-		return err
-	}
-
-	return tx.Commit()
+	return fn(q)
 }
 
 type TransferTxParams struct {
@@ -74,7 +83,7 @@ type TransferTxResult struct {
 func (store *SqlStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 
-	err := store.execTx(ctx, func(q *Queries) error {
+	err := store.withTransaction(ctx, func(q *Queries) error {
 		var err error
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams(arg))
 

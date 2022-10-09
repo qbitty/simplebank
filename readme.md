@@ -59,3 +59,20 @@
 ##### 第十二章 配置加载
 
 ##### 第十三章 Mock测试
+
+
+
+
+
+##### 最佳实践总结
+
+- 数据库设计最佳实践
+  - 表名用复数
+  - 结构体名用单数
+- 测试最佳实践
+  - 优先使用随机数据进行测试
+  - 各测试用例之间保持独立，互不影响
+
+- 事务处理最佳实践
+
+  https://blog.devgenius.io/go-golang-clean-architecture-repositories-vs-transactions-9b3b7c953463
