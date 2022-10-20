@@ -67,25 +67,69 @@
 
 ##### 第七章 DB transaction lock & How to handle deadlock
 
+- 如何测试死锁问题
+
+- 如何排查数据库死锁
+- 如何处理数据库死锁
+
 ##### 第八章 如何避免死锁
+
+- 如何从业务逻辑层面避免死锁
 
 ##### 第九章 事务隔离级别及读现象
 
 ##### 第十章 github action
 
+- workflow
+- job
+- step
+- action
+- runner
+
 ##### 第十一章 实现restful api
+
+- 路由机制
+
+- 参数校验
+
+- 参数绑定
+
+- 结果响应
+
+  - 正常结果
+  - 异常结果
+
+- web服务
+
+- api单元测试
+
+  - 表驱动测试
+
+  - mock数据访问层
+  - 保证测试覆盖率（test case齐全）
 
 ##### 第十二章 配置加载
 
+- viper
+- 配置文件场景
+
 ##### 第十三章 Mock测试
 
+- gomock
+- 打桩(stub)
+- 校验结果
 
+##### 第十四章 自定义参数校验
+
+- 定义validator.Func类型函数并实现校验逻辑
+- 将上述函数注册到gin Validator中
+- 将自定义校验器应用到特定参数上
 
 ##### 常用第三方库
 
 - [golang-migrate](https://github.com/golang-migrate/migrate)
 - [Gorm](https://gorm.io/)
--  [sqlx](https://github.com/jmoiron/sqlx) 
+- [sqlx](https://github.com/jmoiron/sqlx) 
 
 - [sqlc](https://sqlc.dev/)
 - [testify](https://github.com/stretchr/testify)
@@ -100,6 +144,7 @@
   - 优先使用随机数据进行测试
   - 各测试用例之间保持独立，避免相互影响
 - 通过main_test.go初始化测试环境和相关依赖
+  
   - 同一个包只能有一个主测试(MainTest)
   
 - 事务处理最佳实践

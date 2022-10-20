@@ -5,7 +5,7 @@ import (
 	"pro.qbitty/simplebank/util"
 )
 
-var currencyValid validator.Func = func(fl validator.FieldLevel) bool {
+var validCurrency validator.Func = func(fl validator.FieldLevel) bool {
 	if currency, ok := fl.Field().Interface().(string); ok {
 		return util.IsSupportedCurrency(currency)
 	}
