@@ -145,6 +145,9 @@
 - [Chi](https://github.com/go-chi/chi)
 - [Viper](https://github.com/spf13/viper)
 - [gomock](https://github.com/golang/mock)
+- [google/uuid](https://github.com/google/uuid)
+- [jwt-go](https://github.com/dgrijalva/jwt-go)
+- 
 
 ##### 最佳实践总结
 
