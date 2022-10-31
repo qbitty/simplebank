@@ -5,31 +5,34 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 	db "pro.qbitty/simplebank/db/sqlc"
+	"pro.qbitty/simplebank/token"
+	"pro.qbitty/simplebank/util"
 )
 
 type Server struct {
-	store  db.Store
-	router *gin.Engine
+	config     util.Config
+	store      db.Store
+	tokenMaker token.Maker
+	router     *gin.Engine
 }
 
-func NewServer(store db.Store) *Server {
+func NewServer(config util.Config, store db.Store) (*Server, error) {
+	maker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
+	if err != nil {
+		return nil, err
+	}
+
 	server := &Server{
-		store: store,
+		config:     config,
+		store:      store,
+		tokenMaker: maker,
 	}
 
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("currency", validCurrency)
 	}
-
-	router := gin.Default()
-	router.POST("/v1/users", server.createUser)
-	router.POST("/v1/accounts", server.createAccount)
-	router.GET("/v1/accounts/:id", server.getAccount)
-	router.GET("/v1/accounts", server.listAccount)
-
-	router.POST("/v1/transfers", server.createTransfer)
-	server.router = router
-	return server
+	server.setupRouter()
+	return server, nil
 }
 
 func (server *Server) Start(address string) error {
