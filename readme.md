@@ -170,3 +170,27 @@
   - 编译时校验接口实现如：var _ Querier = (*Queries)(nil)
   - 尽量让构建过程自动化(make)
   - 闭包应用：Go lacks support for generics type, closure is often used when we want to get the result from a callback function, because the callback function itself doesn’t know the exact type of the result it should return.
+
+##### 核心知识点
+
+- 数据库设计
+  - dbdigram
+  - dbdoc
+  - dbml
+- 数据访问技术(DAO)
+  - sqlc
+- web框架
+  - 路由
+  - 参数校验
+    1. 内置参数校验器
+    2. 自定义参数校验器
+  - 中间件
+    1. 日志
+    2. 异常恢复
+    3. 认证授权
+    4. 安全控制
+- 事务处理技术
+- 测试技术
+  - mock
+- 配置技术
+- CI/CD流程
