@@ -1,5 +1,5 @@
 postgres:
-	docker run --name postgres14 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14
+	docker run --name postgres14 --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14
 
 createdb:
 	docker exec -it postgres14 createdb --username=root --owner=root simple_bank
@@ -36,6 +36,12 @@ test:
 
 server:
 	go run main.go
+
+docker_network:
+	docker network create bank-network
+
+docker_run_server:
+	docker run --name simplebank --network bank-networke DB_SOUECE=postgresql://root:secret@postgres14:5432/simple_bank?sslmode=disable -p 80:8080 simplebank:latest
 
 mock:
 	mockgen -destination db/mock/store.go -package mockdb pro.qbitty/simplebank/db/sqlc Store
