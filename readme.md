@@ -125,6 +125,32 @@
 - 将上述函数注册到gin Validator中
 - 将自定义校验器应用到特定参数上
 
+##### 第二十四章 构建最小化的golang app镜像 -- 多阶段构建
+
+- 基于golang镜像构建golang app二进制可执行文件
+
+- 基于最小化系统镜像及上一步的构建结果构建最终镜像
+
+- 注意：
+
+  - 国内构建时可能无法下载相应的golang module，可通过在Dockerfile中声明ENV GOPROXY https://goproxy.cn,direct解决
+
+    ```dockerfile
+    ENV GOPROXY https://goproxy.cn,direct
+    ```
+
+  - 多阶段构建时使用如下格式引用特定阶段的构建结果
+
+    ```dockerfile
+    COPY --from=builder /app/main .
+    ```
+
+##### 第二十五章 使用docker network连接两个独立的容器
+
+- 创建docker 网络
+- 运行docker容器时通过--network <networ name>指定网络名称
+- 运行docker容器时注意指定数据源环境变量
+
 ##### 常用第三方库
 
 - [golang-migrate](https://github.com/golang-migrate/migrate)
