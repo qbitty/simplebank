@@ -151,6 +151,48 @@
 - 运行docker容器时通过--network <networ name>指定网络名称
 - 运行docker容器时注意指定数据源环境变量
 
+##### 第二十九章 使用aws secrets manager管理生产环境密钥
+
+- 生成随机token_key
+
+  ```sh
+  openssl rand -hex 64 | head -c 32
+  ```
+
+- 创建aws 密钥
+
+- 安装aws cli
+
+- 配置本地aws cli认证
+
+- 授予用户组访问secret manager service的权限
+
+- 解析secret manager service中的密钥
+
+  - 安装jq
+
+    ```sh
+    brew install jq
+    ```
+
+  - 解析密钥
+
+    ```sh
+    aws secretsmanager get-secret-value --secret-id simple_bank --query SecretString --out text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env
+    ```
+
+  - 将解析命令复制到deploy.ci中
+
+  - 提交代码自动push镜像
+
+  - 登录docker
+
+    ```sh
+    aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin 396605755172.dkr.ecr.ap-northeast-1.amazonaws.com
+    ```
+
+    
+
 ##### 常用第三方库
 
 - [golang-migrate](https://github.com/golang-migrate/migrate)
