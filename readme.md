@@ -151,6 +151,11 @@
 - 运行docker容器时通过--network <networ name>指定网络名称
 - 运行docker容器时注意指定数据源环境变量
 
+##### 第二十六章 使用docker compose管理服务
+
+- 定义docker-compose.yaml
+- 修改Dockerfile以适配docker compose
+- 注意服务之间的依赖关系
 ##### 第二十九章 使用aws secrets manager管理生产环境密钥
 
 - 生成随机token_key
@@ -190,8 +195,6 @@
     ```sh
     aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin 396605755172.dkr.ecr.ap-northeast-1.amazonaws.com
     ```
-
-    
 
 ##### 常用第三方库
 
