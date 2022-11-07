@@ -193,7 +193,7 @@
   - 登录docker
 
     ```sh
-    aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin 396605755172.dkr.ecr.ap-northeast-1.amazonaws.com
+    aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 396605755172.dkr.ecr.ap-northeast-1.amazonaws.com
     ```
 
 ##### 常用第三方库
