@@ -1,3 +1,5 @@
+
+
 ### Backend master class
 
 
@@ -156,7 +158,20 @@
 - 定义docker-compose.yaml
 - 修改Dockerfile以适配docker compose
 - 注意服务之间的依赖关系
-##### 第二十九章 使用aws secrets manager管理生产环境密钥
+##### 第二十七章 创建免费的AWS账号
+
+##### 第二十八章 通过github action自动构建及推送docker镜像到AWS ECR
+
+- 创建镜像仓库
+- 创建用户github-ci并记下对应的access-id和access-key
+- 创建deployment用户组
+- 给用户组授权授权
+- 将github-ci关联到deloyment用户组
+- 在github仓库的设置中的secrets下的actions中添加AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY（对应github-ci的取值）
+
+##### 第二十九章 通过AWS RDS中创建生产级数据库
+
+##### 第三十章 使用aws secrets manager管理生产环境密钥
 
 - 生成随机token_key
 
@@ -195,6 +210,97 @@
     ```sh
     aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 396605755172.dkr.ecr.ap-northeast-1.amazonaws.com
     ```
+
+##### 第三十一章 K8s架构及如何在aws上创建EKS集群
+
+- 创建集群
+- 创建node group
+- 伸缩node
+
+##### 第三十二章 使用kubectl和k9s连接aws eks集群
+
+- 更新集群配置信息到本地
+
+  ```sh
+  aws eks update-kubeconfig --name simple-bank --region ap-northeast-1
+  ```
+
+- 配置集群创建者的access_id和access_key
+
+  ```sh
+  cat ~/.aws/credentials
+  ```
+
+- 创建aws auth的configMap
+
+  ```yaml
+  apiVersion: v1 
+  kind: ConfigMap 
+  metadata: 
+    name: aws-auth 
+    namespace: kube-system 
+  data: 
+    mapUsers: | 
+      - userarn: arn:aws:iam::396605755172:user/github-ci
+        username: github-ci
+        groups:
+          - system:masters
+  ```
+
+- 基于集群创建者的认证信息部署confgiMap
+
+  ```sh
+  export AWS_PROFILE=default
+  kubectl apply -f eks/aws-auth.yaml
+  ```
+
+- 配置非集群创建者的access_id和access_key
+
+##### 第三十二章 基于AWS EKS部署应用
+
+- 创建deployment
+- 创建LoadBalancer类型的service
+
+##### 第三十三章 使用AWS Route 53注册域名及配置DNS记录
+
+- 购买域名
+- 配置DNS的A记录，使其指向service的loadbalancer
+
+##### 第三十四章 使用ingress路由网络请求
+
+- 声明ingress.yaml
+
+- 部署ingress
+
+- 部署ingress controller
+
+  ```sh
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/aws/deploy.yaml
+  ```
+
+- 修改service的类型为ClusterIP并重新部署
+
+- 修改DNS的A记录使其指向ingress loadbalancer
+
+##### 第三十五章 基于cert-manager的TLS自动且免费认证
+
+- 部署cert-manager组件
+
+  ```sh
+  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
+  ```
+
+- 声明issuer.yaml
+
+- 部署issuer
+
+- 修改ingress.yaml
+
+- 重新部署ingress
+
+##### 第三十六章 通过github action自动部署应用到aws eks
+
+- 参考配置文件
 
 ##### 常用第三方库
 
