@@ -1,0 +1,40 @@
+2022-11-16T01:58:18.983Z
+Error: ENOENT: no such file or directory, stat '/Users/q-baby/wksp/go_proj/simplebank/docs/schema.sql'
+    at Object.statSync (node:fs:1591:3)
+    at validateFilePlugin (/usr/local/lib/node_modules/@dbml/cli/lib/cli/validatePlugins/validatePlugins.js:13:28)
+    at /usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:28:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (/usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:28:16)
+    at importHandler (/usr/local/lib/node_modules/@dbml/cli/lib/cli/import.js:33:39)
+    at Object.sql2dbml (/usr/local/lib/node_modules/@dbml/cli/lib/cli/index.js:38:23)
+    at Object.<anonymous> (/usr/local/lib/node_modules/@dbml/cli/bin/sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1149:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1203:10)
+
+2022-11-16T01:58:36.725Z
+SyntaxError: You have a syntax error at "schema.sql" line 10 column 25. Expected ")", ",", "CHECK", "CONSTRAINT", "DEFAULT", "GENERATED", "NOT", "NULL", "PRIMARY", "REFERENCES", "UNIQUE", or space but "t" found.
+    at /usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:55:13
+    at Array.forEach (<anonymous>)
+    at generate (/usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at importHandler (/usr/local/lib/node_modules/@dbml/cli/lib/cli/import.js:40:27)
+    at Object.sql2dbml (/usr/local/lib/node_modules/@dbml/cli/lib/cli/index.js:38:23)
+    at Object.<anonymous> (/usr/local/lib/node_modules/@dbml/cli/bin/sql2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1149:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1203:10)
+    at Module.load (node:internal/modules/cjs/loader:1027:32)
+    at Module._load (node:internal/modules/cjs/loader:868:12)
+
+ROOT_ERROR:
+SyntaxError: Expected ")", ",", "CHECK", "CONSTRAINT", "DEFAULT", "GENERATED", "NOT", "NULL", "PRIMARY", "REFERENCES", "UNIQUE", or space but "t" found.
+    at peg$buildStructuredError (/usr/local/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/postgresParser.js:34:7205)
+    at Object.peg$parse [as parse] (/usr/local/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/postgresParser.js:43:598)
+    at Function.parsePostgresToJSON (/usr/local/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:49:41)
+    at Function.parse (/usr/local/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/parse/Parser.js:77:32)
+    at Object._import [as import] (/usr/local/lib/node_modules/@dbml/cli/node_modules/@dbml/core/lib/import/index.js:15:37)
+    at /usr/local/lib/node_modules/@dbml/cli/lib/cli/import.js:40:68
+    at /usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:52:23
+    at Array.forEach (<anonymous>)
+    at generate (/usr/local/lib/node_modules/@dbml/cli/lib/cli/utils.js:48:14)
+    at importHandler (/usr/local/lib/node_modules/@dbml/cli/lib/cli/import.js:40:27)
+{"start":{"offset":284,"line":10,"column":25},"end":{"offset":285,"line":10,"column":26}}
+
