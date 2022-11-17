@@ -29,7 +29,7 @@ type Entry struct {
 type Session struct {
 	ID           uuid.UUID `json:"id"`
 	Username     string    `json:"username"`
-	RefrashToken string    `json:"refrash_token"`
+	RefreshToken string    `json:"refresh_token"`
 	UserAgent    string    `json:"user_agent"`
 	ClientIp     string    `json:"client_ip"`
 	IsBlocked    bool      `json:"is_blocked"`

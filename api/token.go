@@ -10,7 +10,7 @@ import (
 )
 
 type renewAccessTokenRequest struct {
-	RefrashToken string `json:"refrash_token" binding:"required"`
+	RefreshToken string `json:"refresh_token" binding:"required"`
 }
 
 type renewAccessTokenResponse struct {
@@ -26,13 +26,13 @@ func (server *Server) renewAccessToken(ctx *gin.Context) {
 		return
 	}
 
-	refrashPayload, err := server.tokenMaker.VerifyToken(req.RefrashToken)
+	refreshPayload, err := server.tokenMaker.VerifyToken(req.RefreshToken)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
 		return
 	}
 
-	session, err := server.store.GetSession(ctx, refrashPayload.ID)
+	session, err := server.store.GetSession(ctx, refreshPayload.ID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -48,13 +48,13 @@ func (server *Server) renewAccessToken(ctx *gin.Context) {
 		return
 	}
 
-	if session.Username != refrashPayload.Username {
+	if session.Username != refreshPayload.Username {
 		err := fmt.Errorf("incorrect session user")
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
 		return
 	}
 
-	if session.RefrashToken != req.RefrashToken {
+	if session.RefreshToken != req.RefreshToken {
 		err := fmt.Errorf("mismatched session token")
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
 		return
@@ -66,7 +66,7 @@ func (server *Server) renewAccessToken(ctx *gin.Context) {
 		return
 	}
 
-	accessToken, accessTokenPayload, err := server.tokenMaker.CreateToken(refrashPayload.Username, server.config.AccessTokenDuration)
+	accessToken, accessTokenPayload, err := server.tokenMaker.CreateToken(refreshPayload.Username, server.config.AccessTokenDuration)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
