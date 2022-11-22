@@ -108,7 +108,7 @@ func runGatewayServer(config util.Config, store db.Store) {
 	}
 }
 
-func runHttpServer(config util.Config, store db.Store) {
+func runGinServer(config util.Config, store db.Store) {
 	server, err := api.NewServer(config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
