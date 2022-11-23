@@ -42,7 +42,7 @@ service SimpleBank {
         summary: "Login user";
     };
   };
-  rpc UpdateeUser(UpdateUserRequest) returns (UpdateUserResponse) {
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
         patch: "/v1/update_user"
         body: "*"
